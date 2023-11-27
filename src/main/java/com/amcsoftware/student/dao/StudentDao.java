@@ -11,4 +11,9 @@ import java.util.UUID;
 public interface StudentDao {
      List<Student> selectAllStudents();
      Optional<Student> findStudentById(UUID id);
+     void insertStudent(Student student);
+     boolean isEmail(String email);
+     boolean existById(UUID id);
+     void deleteStudentWithId(UUID id);
+     void updateStudentWithId(Student student);
 }

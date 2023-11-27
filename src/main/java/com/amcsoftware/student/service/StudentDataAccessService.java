@@ -25,4 +25,29 @@ public class StudentDataAccessService implements StudentDao {
     public Optional<Student> findStudentById(UUID id) {
         return studentRepository.findById(id);
     }
+
+    @Override
+    public void insertStudent(Student student) {
+        studentRepository.save(student);
+    }
+
+    @Override
+    public boolean isEmail(String email) {
+        return studentRepository.existsStudentByEmail(email);
+    }
+
+    @Override
+    public boolean existById(UUID id) {
+        return studentRepository.existsById(id);
+    }
+
+    @Override
+    public void deleteStudentWithId(UUID id) {
+        studentRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateStudentWithId(Student student) {
+        studentRepository.save(student);
+    }
 }

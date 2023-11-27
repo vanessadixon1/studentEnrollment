@@ -6,6 +6,10 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
+@Table(
+        name = "student",
+        uniqueConstraints = {@UniqueConstraint(name = "student_email_key", columnNames = "email")}
+)
 public class Student {
     @Id
     @GeneratedValue
@@ -15,7 +19,7 @@ public class Student {
     private String fistName;
     @Column(name = "last_name", nullable = false)
     private String lastName;
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false)
     private String email;
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;

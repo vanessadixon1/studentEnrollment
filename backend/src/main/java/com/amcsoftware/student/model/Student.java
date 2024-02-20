@@ -16,7 +16,7 @@ public class Student {
     @Column(name="id", nullable = false)
     private UUID id;
     @Column(name = "first_name", nullable = false)
-    private String fistName;
+    private String firstName;
     @Column(name = "last_name", nullable = false)
     private String lastName;
     @Column(name = "email", nullable = false)
@@ -32,7 +32,7 @@ public class Student {
     public Student(UUID id, String fistName,
                    String lastName, String email, String phoneNumber, Integer age) {
         this.id = id;
-        this.fistName = fistName;
+        this.firstName = fistName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -41,7 +41,7 @@ public class Student {
 
     public Student(String fistName, String lastName,
                    String email, String phoneNumber, Integer age) {
-        this.fistName = fistName;
+        this.firstName = fistName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -56,12 +56,12 @@ public class Student {
         this.id = id;
     }
 
-    public String getFistName() {
-        return fistName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFistName(String fistName) {
-        this.fistName = fistName;
+    public void setFirstName(String fistName) {
+        this.firstName = fistName;
     }
 
     public String getLastName() {
@@ -101,23 +101,24 @@ public class Student {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return Objects.equals(id, student.id) && Objects.equals(fistName, student.fistName) && Objects.equals(lastName, student.lastName) && Objects.equals(email, student.email) && Objects.equals(phoneNumber, student.phoneNumber) && Objects.equals(age, student.age);
+        return Objects.equals(id, student.id) && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && Objects.equals(email, student.email) && Objects.equals(phoneNumber, student.phoneNumber) && Objects.equals(age, student.age);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, fistName, lastName, email, phoneNumber, age);
+        return Objects.hash(id, firstName, lastName, email, phoneNumber, age);
     }
 
     @Override
     public String toString() {
         return "Student{" +
                 "id=" + id +
-                ", fistName='" + fistName + '\'' +
+                ", fistName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", age=" + age +
                 '}';
     }
+
 }

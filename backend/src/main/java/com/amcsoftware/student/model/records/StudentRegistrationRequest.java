@@ -1,9 +1,14 @@
 package com.amcsoftware.student.model.records;
 
-public record StudentUpdateRequest(
+import java.util.ArrayList;
+
+public record StudentRegistrationRequest(
         String firstName,
         String lastName,
         String email,
-        String phoneNumber
+        String phoneNumber,
+        Integer age
 ) {
+
 }
+

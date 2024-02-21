@@ -52,11 +52,6 @@ jobs:
         run: echo "BUILD_NUMBER=$(date '+%d.%m.%Y.%H.%M.%S')" >> $GITHUB_OUTPUT
       - name: Build Package Push with Maven
         run: mvn -ntp -B verify -Ddocker.image.tag=${{steps.build-number.outputs.BUILD_NUMBER}} jib:build
-      - name: Send Slack Message
-          run: >
-            curl -X POST -H 'Content-type: application/json' 
-            --data '{"text":":docker: Image tag:${{steps.build-number.outputs.BUILD_NUMBER}} pushed to https://hub.docker.com/repository/docker/vama3/schoolenrollment-api"}' 
-            ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Update Dockerrun.aws.json api tag with new build number
         run:
           echo "Dockerrun.aws.json before updating tag"

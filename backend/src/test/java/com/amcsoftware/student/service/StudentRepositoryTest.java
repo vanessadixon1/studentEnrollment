@@ -24,7 +24,7 @@ class StudentRepositoryTest extends AbstractTestContainer {
     void existsStudentByEmail() {
         String email = "aiei@gmail.com";
 
-        boolean exist = underTest.existsStudentByEm(email);
+        boolean exist = underTest.existsStudentByEmail(email);
 
         assertThat(exist).isFalse();
 

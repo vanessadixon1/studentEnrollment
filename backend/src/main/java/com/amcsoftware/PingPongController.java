@@ -23,10 +23,4 @@ public class PingPongController {
 
     }
 
-    @GetMapping("/sil")
-    public PingPong getPi() {
-        return new PingPong("silly rabbit");
-
-    }
-
 }

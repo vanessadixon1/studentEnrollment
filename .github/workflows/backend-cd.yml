@@ -52,10 +52,8 @@ jobs:
         run: echo "BUILD_NUMBER=$(date '+%d.%m.%Y.%H.%M.%S')" >> $GITHUB_OUTPUT
       - name: send Slack Message
           run: >
-            curl && curl -X POST -H 'Content-type: application/json'
-            --data '
-              {"text": "Building with Maven :maven:"}
-            '
+            curl -X POST -H 'Content-type: application/json' 
+            --data '{"text":":maven: Building with Maven"}' 
             ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: Build Package Push with Maven
         run: mvn -ntp -B verify -Ddocker.image.tag=${{steps.build-number.outputs.BUILD_NUMBER}} jib:build

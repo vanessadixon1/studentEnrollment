@@ -23,4 +23,10 @@ public class PingPongController {
 
     }
 
+    @GetMapping("/asr")
+    public PingPong getPi() {
+        return new PingPong("ii");
+
+    }
+
 }

@@ -34,7 +34,7 @@ public class StudentJDBCAccessService implements StudentDao {
     @Override
     public Optional<Student> findStudentById(UUID id) {
         var sql = """
-                SELECT * FROM student WHERE id = ?
+                SELECT * FROM student WHERE email = ?
                 """;
 
         return jdbcTemplate.query(sql,studentRowMapper,id).stream().findFirst();

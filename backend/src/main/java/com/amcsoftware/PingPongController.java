@@ -17,9 +17,6 @@ public class PingPongController {
         return new PingPong("new resa");
     }
 
-    @GetMapping("/c")
-    public PingPong rain() {
-        return new PingPong("resa");
-    }
+
 
 }

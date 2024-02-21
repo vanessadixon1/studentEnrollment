@@ -23,19 +23,9 @@ public class PingPongController {
 
     }
 
-    @GetMapping("/asr")
-    public PingPong getPi() {
-        return new PingPong("ii");
-    }
-
-    @GetMapping("/asr")
-    public PingPong getP() {
-        return new PingPong("sha");
-    }
-
-    @GetMapping("/a")
-    public PingPong ge() {
-        return new PingPong("sh");
+    @GetMapping("/kappina")
+    public PingPong holdTime() {
+        return new PingPong("this is how");
     }
 
 }

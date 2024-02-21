@@ -46,7 +46,7 @@ public class StudentJDBCAccessService implements StudentDao {
                 INSERT INTO Student (id, first_name, last_name, email, phone_number, age) VALUES(?,?,?,?,?,?)
                 """;
         int result = jdbcTemplate.update(sql, UUID.randomUUID(), student.getFirstName(), student.getLastName(),
-                student.getEmail(), student.getPhoneNumber());
+                student.getEmail(), student.getPhoneNumber(), student.getAge());
         System.out.println("Updated = " + result);
     }
 

@@ -33,4 +33,9 @@ public class PingPongController {
         return new PingPong("sha");
     }
 
+    @GetMapping("/a")
+    public PingPong ge() {
+        return new PingPong("sh");
+    }
+
 }

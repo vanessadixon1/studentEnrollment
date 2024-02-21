@@ -23,9 +23,4 @@ public class PingPongController {
 
     }
 
-    @GetMapping("/kappina")
-    public PingPong holdTime() {
-        return new PingPong("this is how");
-    }
-
 }

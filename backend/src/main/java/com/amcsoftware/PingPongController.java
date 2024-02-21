@@ -29,4 +29,11 @@ public class PingPongController {
 
     }
 
+    @GetMapping("/co")
+    public PingPong geti() {
+        return new PingPong("controller");
+
+    }
+
+
 }

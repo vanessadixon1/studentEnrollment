@@ -13,17 +13,17 @@ jobs:
     services:
       postgres:
         image: postgres:15.5
-          env:
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: password
-            POSTGRES_DB: school
-          ports:
-            - 5332:5432
-            options:
-              --health-cmd pg_isready
-              --health-interval 10s
-              --health-timeout 5s
-              --health-retries 5
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: school
+        ports:
+          - 5332:5432
+          options:
+            --health-cmd pg_isready
+            --health-interval 10s
+            --health-timeout 5s
+            --health-retries 5
     defaults:
       run:
         working-directory: ./backend

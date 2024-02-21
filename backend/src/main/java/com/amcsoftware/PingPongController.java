@@ -13,12 +13,6 @@ public class PingPongController {
     }
 
     @GetMapping("/k")
-    public PingPong getPin() {
-        return new PingPong("in");
-
-    }
-
-    @GetMapping("/k")
     public PingPong rano() {
         return new PingPong("new resa");
     }

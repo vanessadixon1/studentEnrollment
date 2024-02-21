@@ -22,4 +22,10 @@ public class PingPongController {
         return new PingPong("in");
 
     }
+
+    @GetMapping("/t")
+    public PingPong getPi() {
+        return new PingPong("it");
+
+    }
 }

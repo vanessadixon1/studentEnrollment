@@ -34,7 +34,7 @@ public class StudentJDBCAccessService implements StudentDao {
     @Override
     public Optional<Student> findStudentById(UUID id) {
         var sql = """
-                SELECT * FROM student WHERE email = ?
+                SELECT * FROM student WHERE id = ?
                 """;
 
         return jdbcTemplate.query(sql,studentRowMapper,id).stream().findFirst();
@@ -46,7 +46,7 @@ public class StudentJDBCAccessService implements StudentDao {
                 INSERT INTO Student (id, first_name, last_name, email, phone_number, age) VALUES(?,?,?,?,?,?)
                 """;
         int result = jdbcTemplate.update(sql, UUID.randomUUID(), student.getFirstName(), student.getLastName(),
-                student.getEmail(), student.getPhoneNumber(), student.getAge());
+                student.getEmail(), student.getPhoneNumber());
         System.out.println("Updated = " + result);
     }
 

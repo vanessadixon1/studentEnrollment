@@ -1,5 +1,6 @@
 package com.amcsoftware.rowMappers;
 
+import com.amcsoftware.student.model.Gender;
 import com.amcsoftware.student.model.Student;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,8 @@ public class StudentRowMapper implements RowMapper<Student> {
                 rs.getString("last_name"),
                 rs.getString("email"),
                 rs.getString("phone_number"),
-                rs.getInt("age")
+                rs.getInt("age"),
+                Gender.valueOf(rs.getString("gender"))
         );
     }
 }

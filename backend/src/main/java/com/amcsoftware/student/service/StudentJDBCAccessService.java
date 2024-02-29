@@ -25,7 +25,7 @@ public class StudentJDBCAccessService implements StudentDao {
     @Override
     public List<Student> selectAllStudents() {
         var sql = """
-                SELECT id, first_name, last_name, email, phone_number, age from Student
+                SELECT id, first_name, last_name, email, phone_number, age, gender from Student
                 """;
 
         return jdbcTemplate.query(sql, studentRowMapper);
@@ -43,10 +43,10 @@ public class StudentJDBCAccessService implements StudentDao {
     @Override
     public void insertStudent(Student student) {
         var sql = """
-                INSERT INTO Student (id, first_name, last_name, email, phone_number, age) VALUES(?,?,?,?,?,?)
+                INSERT INTO Student (id, first_name, last_name, email, phone_number, age, gender) VALUES(?,?,?,?,?,?,?)
                 """;
         int result = jdbcTemplate.update(sql, UUID.randomUUID(), student.getFirstName(), student.getLastName(),
-                student.getEmail(), student.getPhoneNumber(), student.getAge());
+                student.getEmail(), student.getPhoneNumber(), student.getAge(), student.getGender().name());
         System.out.println("Updated = " + result);
     }
 

@@ -1,13 +1,15 @@
 package com.amcsoftware.student.model.records;
 
-import java.util.ArrayList;
+
+import com.amcsoftware.student.model.Gender;
 
 public record StudentRegistrationRequest(
         String firstName,
         String lastName,
         String email,
         String phoneNumber,
-        Integer age
+        Integer age,
+        Gender gender
 ) {
 
 }

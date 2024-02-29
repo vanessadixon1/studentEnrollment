@@ -25,27 +25,32 @@ public class Student {
     private String phoneNumber;
     @Column(name = "age", nullable = false)
     private Integer age;
+    @Column(name = "gender", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
-    public Student() {
+    public Student(UUID id, String first_name, String last_name, String email, String phone_number, int age, String gender) {
     }
 
     public Student(UUID id, String fistName,
-                   String lastName, String email, String phoneNumber, Integer age) {
+                   String lastName, String email, String phoneNumber, Integer age, Gender gender) {
         this.id = id;
         this.firstName = fistName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.age = age;
+        this.gender = gender;
     }
 
     public Student(String fistName, String lastName,
-                   String email, String phoneNumber, Integer age) {
+                   String email, String phoneNumber, Integer age, Gender gender) {
         this.firstName = fistName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.age = age;
+        this.gender = gender;
     }
 
     public UUID getId() {
@@ -60,8 +65,8 @@ public class Student {
         return firstName;
     }
 
-    public void setFirstName(String fistName) {
-        this.firstName = fistName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -96,29 +101,38 @@ public class Student {
         this.age = age;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Student student = (Student) o;
-        return Objects.equals(id, student.id) && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && Objects.equals(email, student.email) && Objects.equals(phoneNumber, student.phoneNumber) && Objects.equals(age, student.age);
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, phoneNumber, age);
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(id, student.id) && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && Objects.equals(email, student.email) && Objects.equals(phoneNumber, student.phoneNumber) && Objects.equals(age, student.age) && gender == student.gender;
     }
 
     @Override
     public String toString() {
         return "Student{" +
                 "id=" + id +
-                ", fistName='" + firstName + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", age=" + age +
+                ", gender=" + gender +
                 '}';
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email, phoneNumber, age, gender);
+    }
 }

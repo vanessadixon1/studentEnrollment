@@ -33,7 +33,7 @@ public class StudentServices {
         checkEmailAvailability(studentRegistrationRequest.email());
         Student newStudent = new Student(studentRegistrationRequest.firstName(),
                 studentRegistrationRequest.lastName(),studentRegistrationRequest.email(),
-                studentRegistrationRequest.phoneNumber(),studentRegistrationRequest.age());
+                studentRegistrationRequest.phoneNumber(),studentRegistrationRequest.age(),studentRegistrationRequest.gender());
         studentDao.insertStudent(newStudent);
     }
 

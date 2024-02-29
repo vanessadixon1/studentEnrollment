@@ -2,6 +2,7 @@ package com.amcsoftware.student.service;
 
 import com.amcsoftware.AbstractTestContainer;
 import com.amcsoftware.rowMappers.StudentRowMapper;
+import com.amcsoftware.student.model.Gender;
 import com.amcsoftware.student.model.Student;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +26,7 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
     @Test
     void selectAllStudents() {
         Student student = new Student(UUID.randomUUID(), "Vanessa", "data", "aieji@gmail.com",
-                "770-741-1000", 35);
+                "770-741-1000", 35,Gender.FEMALE);
         underTest.insertStudent(student);
 
         List<Student> students = underTest.selectAllStudents();
@@ -39,7 +40,7 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
         UUID id = UUID.fromString("fc15c009-43f6-49ce-998e-f57127c26239");
         String email = "aiei@gmail.com";
         Student student = new Student(id, "Vanessa", "data", email,
-                "770-741-1000", 35);
+                "770-741-1000", 35, Gender.FEMALE);
         underTest.insertStudent(student);
 
        UUID testId =  underTest.selectAllStudents().stream()
@@ -54,6 +55,7 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
             assertThat(c.getEmail()).isEqualTo(student.getEmail());
             assertThat(c.getPhoneNumber()).isEqualTo(student.getPhoneNumber());
             assertThat(c.getAge()).isEqualTo(student.getAge());
+            assertThat(c.getGender()).isEqualTo(student.getGender());
         });
     }
 
@@ -71,7 +73,7 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
         UUID id = UUID.fromString("fc15c009-43f6-49ce-998e-f57127c26230");
         String email = "grap@gmail.com";
         Student student = new Student(id, "Dra", "Trac", email,
-                "770-741-112", 35);
+                "770-741-112", 35, Gender.FEMALE);
         underTest.insertStudent(student);
         UUID testId =  underTest.selectAllStudents().stream()
                 .filter(s -> s.getEmail().equals(email)).map(Student::getId).findFirst().orElseThrow();
@@ -85,6 +87,7 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
             assertThat(c.getEmail()).isEqualTo(student.getEmail());
             assertThat(c.getPhoneNumber()).isEqualTo(student.getPhoneNumber());
             assertThat(c.getAge()).isEqualTo(student.getAge());
+            assertThat(c.getGender()).isEqualTo(student.getGender());
         });
 
     }
@@ -96,7 +99,7 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
        assertThat(isEmail).isFalse();
         UUID id = UUID.fromString("fc15c007-43f6-49ce-998e-f57127c26236");
         Student student = new Student(id, "Qway", "Jackson", email,
-                "770-741-1120", 38);
+                "770-741-1120", 38,Gender.FEMALE);
         underTest.insertStudent(student);
 
         isEmail = underTest.isEmail(email);
@@ -110,7 +113,7 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
         UUID id = UUID.fromString("fc15c009-43f6-49ce-998e-f57127c26212");
         String email = "gr@gmail.com";
         Student student = new Student(id, "ra", "rac", email,
-                "770-749-1125", 39);
+                "770-749-1125", 39,Gender.FEMALE);
         underTest.insertStudent(student);
 
         UUID testId =  underTest.selectAllStudents().stream()
@@ -126,7 +129,7 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
         UUID id = UUID.fromString("fc15c009-43f6-49ce-998e-f57127c26230");
         String email = "g@gmail.com";
         Student student = new Student(id, "Dra", "Trac", email,
-                "770-741-112", 35);
+                "770-741-112", 35, Gender.FEMALE);
         underTest.insertStudent(student);
 
         UUID uid = underTest.selectAllStudents().stream().filter(person -> person.getEmail().equals(email))
@@ -141,7 +144,6 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
         exist = underTest.existById(uid);
 
         assertThat(exist).isFalse();
-
     }
 
 }

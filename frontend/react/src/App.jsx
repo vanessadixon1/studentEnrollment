@@ -42,9 +42,9 @@ function App() {
   return (
           <SidebarWithHeader>
               <Wrap justify={"center"} spacing={"30px"}>
-                  {students.map(({id, firstName, lastName, email, age},idx) => (
+                  {students.map(({id, firstName, lastName, email, age, gender},idx) => (
                       <WrapItem key={id}>
-                          <CardWithImage name={`${firstName} ${lastName}`} email={email} age={age}/>
+                          <CardWithImage name={`${firstName} ${lastName}`} email={email} age={age} gender={gender}/>
                       </WrapItem>
                       ))}
               </Wrap>

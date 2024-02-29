@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 
 export default function CardWithImage({name, email, age, gender}) {
-    gender = gender.toLowerCase() === 'Male'.toLowerCase() ? 'men' : 'women';
+    gender = gender.toLowerCase() === 'MALE'.toLowerCase() ? 'men' : 'women';
     console.log(gender)
     return (
         <Center py={6}>

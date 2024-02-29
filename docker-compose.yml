@@ -15,7 +15,7 @@ services:
     restart: unless-stopped
   studentenrollment-api:
     container_name: studentenrollment-api
-    image: vama3/studentenrollment-api
+    image: vama3/studentenrollment-api:latest
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/school
     ports:

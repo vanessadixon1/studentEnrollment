@@ -70,9 +70,9 @@ public class StudentServices {
             isChanged = true;
         }
 
-        if(student.getAge() != request.age()) {
-            throw new RequestValidationException("no changes made - unable to change age");
-        }
+//        if(student.getAge() != request.age()) {
+//            throw new RequestValidationException("no changes made - unable to change age");
+//        }
 
         if(!isChanged) {
             throw new RequestValidationException("no changes made");

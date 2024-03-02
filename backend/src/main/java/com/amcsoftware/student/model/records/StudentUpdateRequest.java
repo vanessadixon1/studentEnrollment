@@ -4,7 +4,6 @@ public record StudentUpdateRequest(
         String firstName,
         String lastName,
         String email,
-        String phoneNumber,
-        int age
+        String phoneNumber
 ) {
 }

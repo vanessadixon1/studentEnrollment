@@ -2,13 +2,31 @@
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
+      "name": "studentenrollment-react",
+      "image": "vama3/studentenrollment-react:latest",
+      "essential": true,
+      "memory": 256,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 5173
+        }
+      ],
+      "environment": [
+        {
+          "name": "SPRING_DATASOURCE_URL",
+          "value": "jdbc:postgresql://awseb-e-xrn2ikjibv-stack-awsebrdsdatabase-wyljelyjfsr3.c30k4mw2am4i.us-east-1.rds.amazonaws.com:5432/school"
+        }
+      ]
+    },
+    {
       "name": "studentenrollment-api",
       "image": "vama3/studentenrollment-api:latest",
       "essential": true,
       "memory": 512,
       "portMappings": [
         {
-          "hostPort": 80,
+          "hostPort": 8082,
           "containerPort": 8081
         }
       ],

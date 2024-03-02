@@ -13,6 +13,7 @@ services:
     networks:
       - postgres
     restart: unless-stopped
+
   studentenrollment-api:
     container_name: studentenrollment-api
     image: vama3/studentenrollment-api:latest
@@ -24,6 +25,19 @@ services:
       - postgres
     depends_on:
       - db
+    restart: unless-stopped
+
+  studentenrollment-react:
+    container_name: studentenrollment-react
+    image: vama3/studentenrollment-react
+    build:
+      context: frontend/react
+      args:
+        api_base_url: http://localhost:8082
+    ports:
+      - "3000:5173"
+    depends_on:
+      - studentenrollment-api
     restart: unless-stopped
 
   pgadmin:

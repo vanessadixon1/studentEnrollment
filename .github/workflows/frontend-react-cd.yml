@@ -1,69 +1,69 @@
-name: CD - Deploy React Frontend
-
-on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - frontend/react/**
-
-jobs:
-  deploy:
-    if: false
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./frontend/react
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set build number
-        id: set-build-number
-        run: echo "::set-output name=build_number::$(date '+%d.%m.%Y.%H.%M.%S')"
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
-
-      - name: Docker Build and push
-        run: |
-          chmod +x ../../.ci/build-publish.sh
-          USERNAME=vama3 \
-          REPO=studentenrollment-react \
-          TAG=${{ steps.set-build-number.outputs.build_number }} \
-          ../../.ci/build-publish.sh . \
-            --build-arg api_base_url=http://s-api-env.eba-tigrzzcj.us-east-1.elasticbeanstalk.com:8081
-
-      - name: Update Dockerrun.aws.json react image tag with new build number
-        run: |
-          echo "Dockerrun.aws.json before updating tag"
-          cat ../../Dockerrun.aws.json
-          sed -i -E 's_(vama3/studentenrollment-react)([^"]*)_\1'${{ steps.set-build-number.outputs.build_number }}'_' ../../Dockerrun.aws.json
-          echo "Dockerrun.aws.json after updating tag"
-          cat ../../Dockerrun.aws.json
-
-      - name: Deploy to Elastic Beanstalk
-        uses: einaregilsson/beanstalk-deploy@v21
-        with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          application_name: ${{ secrets.EB_APPLICATION_NAME }}
-          environment_name: ${{ secrets.EB_ENVIRONMENT_NAME }}
-          version_label: ${{ steps.set-build-number.outputs.build_number }}
-          version_description: ${{ github.sha }}
-          region: ${{ secrets.EB_REGION }}
-          deployment_package: Dockerrun.aws.json
-          wait_for_environment_recovery: 90
-
-#       - name: Commit and push Dockerrun.aws.json
+# name: CD - Deploy React Frontend
+#
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - frontend/react/**
+#
+# jobs:
+#   deploy:
+#     if: false
+#     runs-on: ubuntu-latest
+#     defaults:
+#       run:
+#         working-directory: ./frontend/react
+#
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+#
+#       - name: Set build number
+#         id: set-build-number
+#         run: echo "::set-output name=build_number::$(date '+%d.%m.%Y.%H.%M.%S')"
+#
+#       - name: Login to Docker Hub
+#         uses: docker/login-action@v2
+#         with:
+#           username: ${{ secrets.DOCKERHUB_USERNAME }}
+#           password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+#
+#       - name: Docker Build and push
 #         run: |
-#           git config user.name github-actions
-#           git config user.email github-actions@github.com
-#           git add ../../Dockerrun.aws.json
-#           git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.build_number }}"
-#           git push
+#           chmod +x ../../.ci/build-publish.sh
+#           USERNAME=vama3 \
+#           REPO=studentenrollment-react \
+#           TAG=${{ steps.set-build-number.outputs.build_number }} \
+#           ../../.ci/build-publish.sh . \
+#             --build-arg api_base_url=http://s-api-env.eba-tigrzzcj.us-east-1.elasticbeanstalk.com:8081
+#
+#       - name: Update Dockerrun.aws.json react image tag with new build number
+#         run: |
+#           echo "Dockerrun.aws.json before updating tag"
+#           cat ../../Dockerrun.aws.json
+#           sed -i -E 's_(vama3/studentenrollment-react)([^"]*)_\1'${{ steps.set-build-number.outputs.build_number }}'_' ../../Dockerrun.aws.json
+#           echo "Dockerrun.aws.json after updating tag"
+#           cat ../../Dockerrun.aws.json
+#
+#       - name: Deploy to Elastic Beanstalk
+#         uses: einaregilsson/beanstalk-deploy@v21
+#         with:
+#           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+#           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           application_name: ${{ secrets.EB_APPLICATION_NAME }}
+#           environment_name: ${{ secrets.EB_ENVIRONMENT_NAME }}
+#           version_label: ${{ steps.set-build-number.outputs.build_number }}
+#           version_description: ${{ github.sha }}
+#           region: ${{ secrets.EB_REGION }}
+#           deployment_package: Dockerrun.aws.json
+#           wait_for_environment_recovery: 90
+#
+# #       - name: Commit and push Dockerrun.aws.json
+# #         run: |
+# #           git config user.name github-actions
+# #           git config user.email github-actions@github.com
+# #           git add ../../Dockerrun.aws.json
+# #           git commit -m "Update Dockerrun.aws.json docker image with new tag ${{ steps.build-number.outputs.build_number }}"
+# #           git push

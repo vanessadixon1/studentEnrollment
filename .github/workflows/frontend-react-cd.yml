@@ -36,7 +36,7 @@ jobs:
         run: |
           echo "Dockerrun.aws.json before updating tag"
           cat ../../Dockerrun.aws.json
-          sed -i -E 's_(vama3/studentenrollment-react:)([^"]*)_\1'${{ steps.set-build-number.outputs.build_number }}'_' ../../Dockerrun.aws.json
+          sed -i -E 's_(vama3/studentenrollment-react)([^"]*)_\1'${{ steps.set-build-number.outputs.build_number }}'_' ../../Dockerrun.aws.json
           echo "Dockerrun.aws.json after updating tag"
           cat ../../Dockerrun.aws.json
 

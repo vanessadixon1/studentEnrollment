@@ -28,7 +28,7 @@ services:
     restart: unless-stopped
 
   studentenrollment-react:
-    container_name: studentenrollment-react
+    container_name: studentenrollment-react:latest
     image: vama3/studentenrollment-react
     build:
       context: frontend/react

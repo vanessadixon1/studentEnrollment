@@ -14,7 +14,7 @@ public class PingPongController {
 
     @GetMapping("/k")
     public PingPong rano() {
-        return new PingPong("new resta was sammiei");
+        return new PingPong("new rest nba was sammiei");
     }
 
 

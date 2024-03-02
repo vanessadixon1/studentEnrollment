@@ -22,10 +22,9 @@ jobs:
       - name: Set build number
         id: set-build-number
         run: echo "::set-output name=build_number::$(date '+%d.%m.%Y.%H.%M.%S')"
-      - name: Debug Docker Login
-        run: |
-          docker version
-          docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+
+      - name: Debug AWS Access Key
+        run: echo "AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}"
 
       - name: Docker Build and push
         run: |

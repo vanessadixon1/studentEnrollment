@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "studentenrollment-react",
-      "image": "vama3/studentenrollment-react02.03.2024.20.55.13",
+      "image": "vama3/studentenrollment-react02.03.2024.21.09.39",
       "essential": true,
       "memory": 256,
       "portMappings": [

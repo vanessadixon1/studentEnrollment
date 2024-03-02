@@ -20,15 +20,15 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set build number
-        id: build-number
-        run: echo "BUILD_NUMBER=$(date '+%d.%m.%Y.%H.%M.%S')" >> $GITHUB_ENV
+        id: set-build-number
+        run: echo "::set-output name=build_number::$(date '+%d.%m.%Y.%H.%M.%S')"
 
       - name: Docker Build and push
         run: |
           chmod +x ../../.ci/build-publish.sh
           USERNAME=vama3 \
           REPO=studentenrollment-react \
-          TAG=${{ steps.build-number.outputs.BUILD_NUMBER }} \
+          TAG=${{ steps.set-build-number.outputs.build_number }} \
           ../../.ci/build-publish.sh . \
             --build-arg api_base_url=http://s-api-env.eba-tigrzzcj.us-east-1.elasticbeanstalk.com:8081
 
@@ -36,7 +36,7 @@ jobs:
         run: |
           echo "Dockerrun.aws.json before updating tag"
           cat ../../Dockerrun.aws.json
-          sed -i -E 's_(vama3/studentenrollment-react:)([^"]*)_\1'${{ steps.build-number.outputs.BUILD_NUMBER}}'_' ../../Dockerrun.aws.json
+          sed -i -E 's_(vama3/studentenrollment-react:)([^"]*)_\1'${{ steps.set-build-number.outputs.build_number }}'_' ../../Dockerrun.aws.json
           echo "Dockerrun.aws.json after updating tag"
           cat ../../Dockerrun.aws.json
 
@@ -47,7 +47,7 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: ${{ secrets.EB_APPLICATION_NAME }}
           environment_name: ${{ secrets.EB_ENVIRONMENT_NAME }}
-          version_label: ${{ steps.build-number.outputs.BUILD_NUMBER }}
+          version_label: ${{ steps.set-build-number.outputs.build_number }}
           version_description: ${{ github.sha }}
           region: ${{ secrets.EB_REGION }}
           deployment_package: Dockerrun.aws.json

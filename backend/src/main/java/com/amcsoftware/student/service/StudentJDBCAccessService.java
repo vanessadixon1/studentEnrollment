@@ -25,7 +25,7 @@ public class StudentJDBCAccessService implements StudentDao {
     @Override
     public List<Student> selectAllStudents() {
         var sql = """
-                SELECT id, first_name, last_name, email, phone_number, age, gender from Student
+                SELECT id, first_name, last_name, email, password, phone_number, age, gender from Student
                 """;
 
         return jdbcTemplate.query(sql, studentRowMapper);
@@ -43,10 +43,10 @@ public class StudentJDBCAccessService implements StudentDao {
     @Override
     public void insertStudent(Student student) {
         var sql = """
-                INSERT INTO Student (id, first_name, last_name, email, phone_number, age, gender) VALUES(?,?,?,?,?,?,?)
+                INSERT INTO Student (id, first_name, last_name, email, password, phone_number, age, gender) VALUES(?,?,?,?,?,?,?,?)
                 """;
         int result = jdbcTemplate.update(sql, UUID.randomUUID(), student.getFirstName(), student.getLastName(),
-                student.getEmail(), student.getPhoneNumber(), student.getAge(), student.getGender().name());
+                student.getEmail(), student.getPassword(), student.getPhoneNumber(), student.getAge(), student.getGender().name());
         System.out.println("Updated = " + result);
     }
 
@@ -83,6 +83,16 @@ public class StudentJDBCAccessService implements StudentDao {
                     WHERE id = ?
                     """;
         jdbcTemplate.update(sql, student.getFirstName(), student.getLastName(), student.getPhoneNumber(), student.getEmail(), student.getId());
+    }
+
+    @Override
+    public Optional<Student> selectUserByEmail(String email) {
+        var sql = """
+                SELECT id, first_name, last_name, email, password, phone_number, age, gender from Student
+                WHERE email = ?
+                """;
+
+        return jdbcTemplate.query(sql, studentRowMapper,email).stream().findFirst();
     }
 
 }

@@ -16,4 +16,5 @@ public interface StudentDao {
      boolean existById(UUID id);
      void deleteStudentWithId(UUID id);
      void updateStudentWithId(Student student);
+     Optional<Student> selectUserByEmail(String email);
 }

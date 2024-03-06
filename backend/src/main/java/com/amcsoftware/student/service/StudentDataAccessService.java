@@ -51,4 +51,9 @@ public class StudentDataAccessService implements StudentDao {
         studentRepository.save(student);
     }
 
+    @Override
+    public Optional<Student> selectUserByEmail(String email) {
+        return studentRepository.findStudentByEmail(email);
+    }
+
 }

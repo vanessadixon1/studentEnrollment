@@ -25,8 +25,8 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
 
     @Test
     void selectAllStudents() {
-        Student student = new Student(UUID.randomUUID(), "Vanessa", "data", "aieji@gmail.com",
-                "770-741-1000", 35,Gender.FEMALE);
+        Student student = new Student(UUID.randomUUID(), "Vanessa", "data", "aieji@gmail.com", "12345"
+                , "770-741-1000", 35,Gender.FEMALE );
         underTest.insertStudent(student);
 
         List<Student> students = underTest.selectAllStudents();
@@ -39,8 +39,8 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
     void findStudentById() {
         UUID id = UUID.fromString("fc15c009-43f6-49ce-998e-f57127c26239");
         String email = "aiei@gmail.com";
-        Student student = new Student(id, "Vanessa", "data", email,
-                "770-741-1000", 35, Gender.FEMALE);
+        Student student = new Student(id, "Vanessa", "data", email, "1234"
+                , "770-741-1000", 35, Gender.FEMALE );
         underTest.insertStudent(student);
 
        UUID testId =  underTest.selectAllStudents().stream()
@@ -72,8 +72,8 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
     void insertStudent() {
         UUID id = UUID.fromString("fc15c009-43f6-49ce-998e-f57127c26230");
         String email = "grap@gmail.com";
-        Student student = new Student(id, "Dra", "Trac", email,
-                "770-741-112", 35, Gender.FEMALE);
+        Student student = new Student(id, "Dra", "Trac", email, "1256"
+                , "770-741-112", 35, Gender.FEMALE);
         underTest.insertStudent(student);
         UUID testId =  underTest.selectAllStudents().stream()
                 .filter(s -> s.getEmail().equals(email)).map(Student::getId).findFirst().orElseThrow();
@@ -98,8 +98,8 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
        boolean isEmail = underTest.isEmail(email);
        assertThat(isEmail).isFalse();
         UUID id = UUID.fromString("fc15c007-43f6-49ce-998e-f57127c26236");
-        Student student = new Student(id, "Qway", "Jackson", email,
-                "770-741-1120", 38,Gender.FEMALE);
+        Student student = new Student(id, "Qway", "Jackson", email, "246"
+                , "770-741-1120", 38,Gender.FEMALE );
         underTest.insertStudent(student);
 
         isEmail = underTest.isEmail(email);
@@ -112,8 +112,8 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
     void existById() {
         UUID id = UUID.fromString("fc15c009-43f6-49ce-998e-f57127c26212");
         String email = "gr@gmail.com";
-        Student student = new Student(id, "ra", "rac", email,
-                "770-749-1125", 39,Gender.FEMALE);
+        Student student = new Student(id, "ra", "rac", email, "246"
+                , "770-749-1125", 39,Gender.FEMALE);
         underTest.insertStudent(student);
 
         UUID testId =  underTest.selectAllStudents().stream()
@@ -128,8 +128,8 @@ class StudentJDBCAccessServiceTest extends AbstractTestContainer {
     void deleteStudentWithId() {
         UUID id = UUID.fromString("fc15c009-43f6-49ce-998e-f57127c26230");
         String email = "g@gmail.com";
-        Student student = new Student(id, "Dra", "Trac", email,
-                "770-741-112", 35, Gender.FEMALE);
+        Student student = new Student(id, "Dra", "Trac", email, "246"
+                , "770-741-112", 35, Gender.FEMALE);
         underTest.insertStudent(student);
 
         UUID uid = underTest.selectAllStudents().stream().filter(person -> person.getEmail().equals(email))

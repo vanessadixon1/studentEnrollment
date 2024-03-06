@@ -8,32 +8,41 @@ import com.amcsoftware.student.model.Student;
 import com.amcsoftware.student.model.records.StudentRegistrationRequest;
 import com.amcsoftware.student.model.records.StudentUpdateRequest;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServices {
     private final StudentDao studentDao;
+    private final PasswordEncoder passwordEncoder;
+    private final StudentDTOMapper studentDTOMapper;
 
-    public StudentServices(@Qualifier("jdbc") StudentDao studentDao) {
+    public StudentServices(@Qualifier("jdbc") StudentDao studentDao, PasswordEncoder passwordEncoder, StudentDTOMapper studentDTOMapper) {
         this.studentDao = studentDao;
+        this.passwordEncoder = passwordEncoder;
+        this.studentDTOMapper = studentDTOMapper;
     }
 
-    public List<Student> getStudents() {
-        return studentDao.selectAllStudents();
+    public List<StudentDTO> getStudents() {
+        return studentDao.selectAllStudents()
+                .stream()
+                .map(studentDTOMapper).collect(Collectors.toList());
     }
 
-    public Student getStudentById(UUID id) {
-        return studentDao.findStudentById(id).orElseThrow(() -> new ResourceNotFound("student not found with id %s".formatted(id)));
+    public StudentDTO getStudentById(UUID id) {
+        return studentDao.findStudentById(id).map(studentDTOMapper)
+                .orElseThrow(() -> new ResourceNotFound("student not found with id %s".formatted(id)));
     }
 
     public void addStudent(StudentRegistrationRequest studentRegistrationRequest) {
         checkEmailAvailability(studentRegistrationRequest.email());
         Student newStudent = new Student(studentRegistrationRequest.firstName(),
-                studentRegistrationRequest.lastName(),studentRegistrationRequest.email(),
-                studentRegistrationRequest.phoneNumber(),studentRegistrationRequest.age(),studentRegistrationRequest.gender());
+                studentRegistrationRequest.lastName(),studentRegistrationRequest.email(), passwordEncoder.encode(studentRegistrationRequest.password()),
+                studentRegistrationRequest.phoneNumber(), studentRegistrationRequest.age(), studentRegistrationRequest.gender());
         studentDao.insertStudent(newStudent);
     }
 
@@ -45,7 +54,8 @@ public class StudentServices {
     }
 
     public void updateStudent(UUID id, StudentUpdateRequest request) {
-        Student student = getStudentById(id);
+        Student student = studentDao.findStudentById(id)
+                .orElseThrow(() -> new ResourceNotFound("student not found with id %s".formatted(id)));
 
         boolean isChanged = false;
 

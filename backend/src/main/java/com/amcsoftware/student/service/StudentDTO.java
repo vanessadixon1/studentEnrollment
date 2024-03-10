@@ -11,6 +11,7 @@ public record StudentDTO(
         String lastName,
         String email,
         Gender gender,
+        String phoneNumber,
         Integer age,
         List<String> roles,
         String username) {

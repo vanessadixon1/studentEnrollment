@@ -28,6 +28,7 @@ export default function CardWithImage({id,name, email, age, gender, phoneNumber,
     const { isOpen, onOpen, onClose } = useDisclosure()
     const cancelRef = useRef()
     gender = gender.toLowerCase() === 'MALE'.toLowerCase() ? 'men' : 'women';
+    const randomPictureId = Math.floor(Math.random() * 85)
 
     function deletingStudent() {
         deleteStudent({id}).then(res => {
@@ -63,7 +64,7 @@ export default function CardWithImage({id,name, email, age, gender, phoneNumber,
                     <Avatar
                         size={'xl'}
                         src={
-                            `https://randomuser.me/api/portraits/${gender}/75.jpg`
+                            `https://randomuser.me/api/portraits/${gender}/${randomPictureId}.jpg`
                         }
                         alt={'Author'}
                         css={{

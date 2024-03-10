@@ -8,6 +8,7 @@ import DrawerForm from "./components/DrawerForm.jsx";
 import {errorNotification} from "./services/Notification.js";
 
 function App() {
+
     const [isLoading, setIsLoading] = useState(false)
     const [students, setStudents] = useState([])
     const [err, setError] = useState("")
@@ -64,7 +65,7 @@ function App() {
                       <WrapItem key={id}>
                           <CardWithImage id={id} name={`${firstName} ${lastName}`} email={email} age={age} gender={gender} phoneNumber={phoneNumber} fetchStudent={fetchStudents}/>
                       </WrapItem>
-                      ))}
+                  ))}
               </Wrap>
           </SidebarWithHeader>
   )

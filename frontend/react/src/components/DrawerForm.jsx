@@ -16,7 +16,7 @@ const DrawerForm = ({fetchStudents}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return <>
         <Button colorScheme={'teal'} leftIcon={<AddIcon/>} onClick={onOpen}>
-            Create customer
+            Create Student
         </Button>
         <Drawer isOpen={isOpen} onClose={onClose} size={"xl"}>
             <DrawerOverlay />

@@ -18,6 +18,7 @@ public class StudentDTOMapper implements Function<Student,StudentDTO> {
                 student.getLastName(),
                 student.getEmail(),
                 student.getGender(),
+                student.getPhoneNumber(),
                 student.getAge(),
                 student.getAuthorities()
                         .stream()

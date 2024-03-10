@@ -44,6 +44,7 @@ const CreateStudentForm = ({fetchStudents}) => {
                     firstName: "",
                     lastName: "",
                     phoneNumber: "",
+                    password: "",
                     email: "",
                     age: 0,
                     gender: "",
@@ -62,6 +63,9 @@ const CreateStudentForm = ({fetchStudents}) => {
                     email: Yup.string()
                         .email('Must be 20 characters or less')
                         .matches({emailRegExp}, "Please enter a valid email")
+                        .required('Required'),
+                    password: Yup.string()
+                        .min(4, 'Must be 4 characters or more')
                         .required('Required'),
                     age: Yup.number()
                         .min(18, 'Must be at least 18 years of age')
@@ -104,17 +108,23 @@ const CreateStudentForm = ({fetchStudents}) => {
                             />
 
                             <MyTextInput
+                                label="Email Address"
+                                name="email"
+                                type="email"
+                                placeholder="jane@email.com"
+                            />
+
+                            <MyTextInput
+                                label="Password"
+                                name="password"
+                                placeholder={"Enter a password"}
+                            />
+
+                            <MyTextInput
                                 label="Phone Number"
                                 name="phoneNumber"
                                 type="text"
                                 placeholder="Contact Number"
-                            />
-
-                            <MyTextInput
-                                label="Email Address"
-                                name="email"
-                                type="email"
-                                placeholder="jane@formik.com"
                             />
 
                             <MyTextInput
@@ -126,7 +136,7 @@ const CreateStudentForm = ({fetchStudents}) => {
 
                             <MySelect label="Gender" name="gender">
                                 <option value="">Select Gender</option>
-                                <option value="MALE">"Male"</option>
+                                <option value="MALE">Male</option>
                                 <option value="FEMALE">Female</option>
                             </MySelect>
 

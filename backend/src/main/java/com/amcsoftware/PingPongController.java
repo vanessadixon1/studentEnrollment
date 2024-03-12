@@ -17,6 +17,4 @@ public class PingPongController {
         return new PingPong("new rest nba was sammiei");
     }
 
-
-
 }

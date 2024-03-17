@@ -1,8 +1,8 @@
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 import {Alert, FormLabel, Input, AlertIcon, Select, Box, Button, Stack} from "@chakra-ui/react";
-import {addStudent} from "../services/client.js";
-import {errorNotification, successNotification} from "../services/Notification.js";
+import {addStudent} from "../../services/client.js";
+import {errorNotification, successNotification} from "../../services/Notification.js";
 
 const MyTextInput = ({ label, ...props }) => {
     const [field, meta] = useField(props);
@@ -34,7 +34,7 @@ const MySelect = ({ label, ...props }) => {
     );
 };
 
-const CreateStudentForm = ({fetchStudents}) => {
+const CreateStudentForm = ({onSuccess}) => {
     const phoneRegExp = "/^((\\\\+[1-9]{1,4}[ \\\\-]*)|(\\\\([0-9]{2,3}\\\\)[ \\\\-]*)|([0-9]{2,4})[ \\\\-]*)*?[0-9]{3,4}?[ \\\\-]*[0-9]{3,4}?$/"
     const emailRegExp = "/[a-zA-Z][a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\\.)+[A-Za-z]+$/"
     return (
@@ -82,7 +82,7 @@ const CreateStudentForm = ({fetchStudents}) => {
                     setSubmitting(true)
                     addStudent(student).then(res => {
                         successNotification("Student Saved",`${student.firstName} ${student.lastName} was successfully saved`)
-                        fetchStudents()
+                        onSuccess(res.headers["authorization"]);
                     }).catch(err => {
                         errorNotification(err.code, err.response.data.message)
                     }).finally(() => {

@@ -57,8 +57,6 @@ const LoginForm = () => {
                 onSubmit={(values, {setSubmitting}) => {
                     setSubmitting(true);
                     login(values).then(res => {
-
-                        console.log("Successfully logged in");
                         navigate("/dashboard")
                     }).catch(err => {
                         errorNotification(
@@ -86,6 +84,12 @@ const LoginForm = () => {
                                 placeholder={"Enter a password"}
                             />
                             <Button isDisabled={!isValid||isSubmitting} type="submit">Login</Button>
+                            <Text>
+                                Don't have an account?{' '}
+                                <Link color='teal.500' href='/signup'>
+                                    sign up
+                                </Link>
+                            </Text>
                         </Stack>
                     </Form>
                 )}

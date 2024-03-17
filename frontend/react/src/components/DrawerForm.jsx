@@ -8,7 +8,7 @@ import {
     DrawerOverlay,
     useDisclosure
 } from '@chakra-ui/react';
-import CreateStudentForm from "./CreateStudentForm";
+import CreateStudentForm from "./shared/CreateStudentForm.jsx";
 
 const AddIcon =() => "+";
 const CloseIcon =() => "x";
@@ -25,7 +25,7 @@ const DrawerForm = ({fetchStudents}) => {
                 <DrawerHeader>Create New Student</DrawerHeader>
 
                 <DrawerBody>
-                  <CreateStudentForm fetchStudents={fetchStudents}/>
+                  <CreateStudentForm onSuccess={fetchStudents}/>
                 </DrawerBody>
 
                 <DrawerFooter>

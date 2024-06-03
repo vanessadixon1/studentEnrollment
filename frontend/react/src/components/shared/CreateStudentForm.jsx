@@ -124,7 +124,7 @@ const CreateStudentForm = ({onSuccess}) => {
                                 label="Phone Number"
                                 name="phoneNumber"
                                 type="text"
-                                placeholder="Contact Number"
+                                placeholder="(777) 8888888 "
                             />
 
                             <MyTextInput
